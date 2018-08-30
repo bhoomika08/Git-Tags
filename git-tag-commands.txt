@@ -1,0 +1,180 @@
+1. Create a repository and push to github.
+
+vins:~/Desktop/Bhoomika$ mkdir Git-Tags
+vins:~/Desktop/Bhoomika$ cd Git-Tags
+vins:~/Desktop/Bhoomika/Git-Tags$ git init
+Initialized empty Git repository in /Users/vins/Desktop/Bhoomika/Git-Tags/.git/
+vins:~/Desktop/Bhoomika/Git-Tags$ git remote add origin https://github.com/bhoomika08/git-tags.git
+
+2. Create two files in master branch, then create a tag 1.0.0 for first release from master.
+
+vins:~/Desktop/Bhoomika/Git-Tags (master)$ git status
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+  file1
+  file2
+nothing added to commit but untracked files present (use "git add" to track)
+
+vins:~/Desktop/Bhoomika/Git-Tags (master)$ git add .
+vins:~/Desktop/Bhoomika/Git-Tags (master)$ git commit -m "add file1 and file2"
+[master 4ed7ac2] add file1 and file2
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 file1
+ create mode 100644 file2
+
+vins:~/Desktop/Bhoomika/Git-Tags (master)$ git tag 1.0.0
+vins:~/Desktop/Bhoomika/Git-Tags (master)$ git push origin master
+Counting objects: 3, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 241 bytes | 241.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/bhoomika08/Git-Tags.git
+   0d0ca47..4ed7ac2  master -> master
+
+3. Now, perform some changes in previous files and create another tag 1.0.1.
+
+vins:~/Desktop/Bhoomika/Git-Tags (master)$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+  modified:   file1
+  modified:   file2
+
+no changes added to commit (use "git add" and/or "git commit -a")
+vins:~/Desktop/Bhoomika/Git-Tags (master)$ git add .
+vins:~/Desktop/Bhoomika/Git-Tags (master)$ git commit -m "change1 in file1 and file2"
+[master fba8ce6] change1 in file1 and file2
+ 2 files changed, 2 insertions(+)
+vins:~/Desktop/Bhoomika/Git-Tags (master)$ git tag 1.0.1
+
+4. Now, create another file file3 and create a tag 1.1.0.
+
+vins:~/Desktop/Bhoomika/Git-Tags (master)$ git status
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+  file3
+
+nothing added to commit but untracked files present (use "git add" to track)
+vins:~/Desktop/Bhoomika/Git-Tags (master)$ git add file3
+vins:~/Desktop/Bhoomika/Git-Tags (master)$ git commit -m "add file3"
+[master 3ac4123] add file3
+ 1 file changed, 1 insertion(+)
+ create mode 100644 file3
+vins:~/Desktop/Bhoomika/Git-Tags (master)$ git tag 1.1.0
+vins:~/Desktop/Bhoomika/Git-Tags (master)$ git tag
+1.0.0
+1.0.1
+1.1.0
+
+5. Now in 1.0.1 release, do some changes in existing files and create another tag 1.0.2.
+
+vins:~/Desktop/Bhoomika/Git-Tags (master)$ git checkout 1.0.1
+Note: checking out '1.0.1'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b <new-branch-name>
+
+HEAD is now at fba8ce6... change1 in file1 and file2
+vins:~/Desktop/Bhoomika/Git-Tags ((HEAD detached at 1.0.1))$ git status
+HEAD detached at 1.0.1
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+  modified:   file1
+  modified:   file2
+
+no changes added to commit (use "git add" and/or "git commit -a")
+vins:~/Desktop/Bhoomika/Git-Tags ((HEAD detached at 1.0.1))$ git add .
+vins:~/Desktop/Bhoomika/Git-Tags ((HEAD detached at 1.0.1))$ git commit -m "changes in file1 and file 2"
+[detached HEAD 21c41ac] changes in file1 and file 2
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+vins:~/Desktop/Bhoomika/Git-Tags ((HEAD detached from 1.0.1))$ git tag 1.0.2
+vins:~/Desktop/Bhoomika/Git-Tags ((HEAD detached from 1.0.1))$ git tag
+1.0.0
+1.0.1
+1.0.2
+1.1.0
+
+6. Also do some changes in release 1.1.0, create a tag for next release 1.1.1.
+
+vins:~/Desktop/Bhoomika/Git-Tags ((HEAD detached from 1.0.1))$ git checkout 1.1.0
+Previous HEAD position was 21c41ac... changes in file1 and file 2
+HEAD is now at 3ac4123... add file3
+vins:~/Desktop/Bhoomika/Git-Tags ((HEAD detached at 1.1.0))$ git status
+HEAD detached at 1.1.0
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+  modified:   file3
+
+no changes added to commit (use "git add" and/or "git commit -a")
+vins:~/Desktop/Bhoomika/Git-Tags ((HEAD detached at 1.1.0))$ git add file3
+vins:~/Desktop/Bhoomika/Git-Tags ((HEAD detached at 1.1.0))$ git commit -m "changes in file3"
+[detached HEAD 342c5de] changes in file3
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+vins:~/Desktop/Bhoomika/Git-Tags ((HEAD detached from 1.1.0))$ git tag 1.1.1
+vins:~/Desktop/Bhoomika/Git-Tags ((HEAD detached from 1.1.0))$ git tag
+1.0.0
+1.0.1
+1.0.2
+1.1.0
+1.1.1
+
+7. All tags should be pushed to github.
+
+vins:~/Desktop/Bhoomika/Git-Tags ((HEAD detached from 1.1.0))$ git push origin 1.0.0
+Total 0 (delta 0), reused 0 (delta 0)
+To https://github.com/bhoomika08/Git-Tags.git
+ * [new tag]         1.0.0 -> 1.0.0
+
+vins:~/Desktop/Bhoomika/Git-Tags ((HEAD detached at 1.0.1))$ git push origin 1.0.1
+Counting objects: 4, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (4/4), 332 bytes | 332.00 KiB/s, done.
+Total 4 (delta 0), reused 0 (delta 0)
+To https://github.com/bhoomika08/Git-Tags.git
+ * [new tag]         1.0.1 -> 1.0.1
+
+vins:~/Desktop/Bhoomika/Git-Tags ((HEAD detached at 1.0.1))$ git push origin 1.0.2
+Counting objects: 4, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 384 bytes | 384.00 KiB/s, done.
+Total 4 (delta 0), reused 0 (delta 0)
+To https://github.com/bhoomika08/Git-Tags.git
+ * [new tag]         1.0.2 -> 1.0.2
+
+vins:~/Desktop/Bhoomika/Git-Tags ((HEAD detached at 1.0.1))$ git push origin 1.1.0
+Counting objects: 3, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 300 bytes | 300.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/bhoomika08/Git-Tags.git
+ * [new tag]         1.1.0 -> 1.1.0
+
+vins:~/Desktop/Bhoomika/Git-Tags ((HEAD detached at 1.0.1))$ git push origin 1.1.1
+Counting objects: 3, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 308 bytes | 308.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/bhoomika08/Git-Tags.git
+ * [new tag]         1.1.1 -> 1.1.1
+
